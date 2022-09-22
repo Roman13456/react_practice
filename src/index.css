@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.bread{
+  z-index: 55;
+  width: 100%;
+  background-color: gray;
+  position: absolute!important;
+  top: 0!important;
+}

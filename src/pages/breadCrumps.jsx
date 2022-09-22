@@ -2,9 +2,9 @@ import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 // import link from '@mui/material/Link';
 import { Outlet, Link } from "react-router-dom";
-function layout() {
+function layout({className}) {
     return (
-        <div>
+        <div className={className}>
             <Breadcrumbs aria-label="breadcrumb" style={{margin:'0 auto',display:'table'}}> 
                 <Link to='/' underline="hover" color="inherit" href="/">
                     todos
@@ -13,9 +13,15 @@ function layout() {
                     to='/about'
                     underline="hover"
                     color="inherit"
-                    href="/material-ui/getting-started/installation/"
                 >
                     About
+                </Link>
+                <Link
+                    to='/gallery'
+                    underline="hover"
+                    color="inherit"
+                >
+                    Gallery
                 </Link>
                 <Typography color="text.primary">Breadcrumbs</Typography>
             </Breadcrumbs>

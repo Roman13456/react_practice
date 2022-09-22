@@ -3,24 +3,31 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Trash } from 'react-bootstrap-icons';
 import { HiPencil } from 'react-icons/hi';
-function TodoCard({todo,index,onDel,onToggle,onEdit}){    
-    const {name,desc,isChecked} = todo  
-    console.log(onEdit)
-    return(
-        <Card>
-              <Card.Body>
-                <div className="d-flex justify-content-between">
-                  <input type='checkbox' checked={isChecked} onChange={() => onToggle(todo.id)}></input>
-                  <Card.Title>{name}</Card.Title>
-                  <Button variant="primary" onClick={() => onDel(index)}><Trash /></Button>
-                  <Button variant="primary" onClick={()=> onEdit()(index,name,desc)}><HiPencil /></Button>
-                </div>
-                <Card.Text>
-                  {desc}
-                </Card.Text>
+import { useDispatch } from 'react-redux'
+import { toggleTodo, deleteTodo } from "../counterSlice";
 
-              </Card.Body>
-            </Card>
-    )
+function TodoCard({ todo, onEdit }) {
+  const dispatch = useDispatch()
+  const { name, desc, isChecked } = todo
+  return (
+    <Card>
+      <Card.Body>
+        <div className="d-flex justify-content-between">
+          <div>
+            <input type='checkbox' id='checkbox' style={{marginRight:'5px'}} checked={isChecked} onChange={() => dispatch(toggleTodo(todo.id))}></input>
+            <label for='checkbox'>{name}</label>
+            </div>
+          <div>
+            <Button variant="primary" style={{marginRight:'5px'}} onClick={() => dispatch(deleteTodo(todo.id))}><Trash /></Button>
+            <Button variant="primary" onClick={() => onEdit()(todo.id, name, desc)}><HiPencil /></Button>
+          </div>
+        </div>
+        <Card.Text style={{textAlign:'center'}}>
+          {desc}
+        </Card.Text>
+
+      </Card.Body>
+    </Card>
+  )
 }
 export default TodoCard
